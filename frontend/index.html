@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Simple Application</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid justify-content-center">
+      <!-- Toggler/collapsible Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-evenly text-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">To-Do-List</a>
+          </li>
+          <li class="nav-item">
+            <!-- Dark mode button with correct ID -->
+            <button id="dark-mode-toggle" class="btn btn-primary navbar-darkmode">🌙</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="shadcn-main">
+    <!-- One Unified Content Box -->
+    <div class="content-box">
+      <section class="intro-section">
+        <h1 class="shadcn-heading">My To-Do-List Application &#128203;</h1>
+        <br>
+        <p class="shadcn-text">
+          Welcome to my simple to-do-list web application, which is designed to showcase my proficiency in building stable, secure and reliable applications in AWS (and will scale to millions of users, despite never needing to!).
+        </p>
+      </section>
+      
+      <!-- Diagram Section -->
+      <section class="diagram-section mt-4">
+        <h2 class="shadcn-heading">Application Diagram</h2>
+        <p class="shadcn-text">
+          Below is the diagram of the application architecture.
+        </p>
+        <iframe frameborder="10" style="width:100%; height:913px;" src="https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&dark=0#R%3Cmxfile%3E%3Cdiagram%20name%3D%22Page-1%22%20id%3D%22aNb2FgmZO5IkZn5BL6Yg%22%3E7ZZLb6MwEMc%2FDcdEGMijR0LTh9SudpuVqp4iFyZg1WBkTEj20%2B8YTMIjkdpDb1WQ4vnbnrHH8zNYbpAe7iXNk2cRAbccOzpY7q3lOMQlHv5p5dgo85t5I8SSRWbQWdiwf2BE26gli6DoDVRCcMXyvhiKLINQ9TQqpaj6w3aC96PmNIaRsAkpH6uvLFJJuwv7rD8AixMT%2BWZpOlLajjVCkdBIVB3JXVtuIIVQTSs9BMB17tq0NPPurvSe1iUhU5%2BZ8Ov3w4f%2FdD%2F%2F%2B2f58sjeZsSevE%2BMlz3lpdmv%2F7pBIeCijMy61bHNRS5Ypup8zlb4YLzAtmbYE2hr6swGwtBe9AUytrSPvjC0F32BDN2TQXwyXGBHGFk99%2FYgvt1ZID7uSpSKswyCU%2BXZKMaSRgyPJBBcSNQykWH2VolKOVoEm1XCFGxyGuqsVkgNajuRKVP7xGltk3jtFatbUYwljY%2F6JECu99AcSDOGc5oX7P00S0JYyoLt4QWKxrlWsRBz3U4PsUZ2SqvCm8ZSlHm9%2FEeMdbF3i81tqAtjS7nSjpQUH9Bu1HJc%2FN3p4lvtGOeDBOxBKoZY%2BZzF2r8SOhw1Fodd7RGzwrL4qbZuXdtk4lKIiBYJRGZLpooxBByu4kFO0OFlBSIFJY84xEzwDKbmmnKNWXWYb0lOury39xQ190x88nxmERsGxy%2Bg6YzQLIsJ0EK10P6A%2BQNmA6aEmOm%2BMZG27Xv%2B%2FFuJJN5ivfK7RJLPEnn9lXQVU6ePqTfGdLa8gOnS%2FTqmaJ7fznVf5xPHXf8H%3C%2Fdiagram%3E%3C%2Fmxfile%3E"></iframe>
+      </section>
+
+      <!-- Architecture Explanation Section -->
+      <section class="architecture-section mt-4">
+        <h2 class="shadcn-heading">Architecture Overview</h2>
+        <p class="shadcn-text">
+          The solution is built using a multi-layered architecture to ensure scalability, security, and maintainability. Key components include:
+        </p>
+        <ul class="list-group list-group-flush text-start">
+            <li class="list-group-item">
+              <strong>Web Application Tier:</strong> Containerized frontend (HTML, CSS, Bootstrap, and JavaScript) and backend (e.g., Python) deployed on a Kubernetes cluster for a responsive and interactive user interface.
+            </li>
+            <li class="list-group-item">
+              <strong>Database Layer:</strong> A MongoDB server hosted on a dedicated EC2 instance with authentication, configured for secure access by the Kubernetes cluster.
+            </li>
+            <li class="list-group-item">
+                <strong>MongoDB Backups:</strong>Periodic MongoDB backups taken daily at 9am UTC using a bash scipt on the VM, then pushed to Amazon S3 for easy retrieval. Lifecycle policies enabled on the S3 bucket to archive and remove old backups.
+              </li>
+            <li class="list-group-item">
+              <strong>Infrastructure:</strong> All components are provisioned and managed using Terraform, including the Kubernetes cluster, load balancers, rest of the architecture setup.
+            </li>
+            <li class="list-group-item">
+              <strong>Additional Components:</strong> Integrated security using AWS Secrets Manager, hosted within an Amazon VPC with CI/CD pipelines deployed via GitHub Actions for continuous integration and delivery.
+            </li>
+          </ul>
+          
+      </section>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS (for the collapse functionality) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script src="index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
