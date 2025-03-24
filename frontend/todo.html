@@ -79,8 +79,24 @@
 
       <!-- To-Do List Display -->
       <section class="todo-list-section mt-4">
+        <!-- Spinner (hidden by default) -->
+        <div id="loading-spinner" 
+            class="spinner-border text-primary" 
+            role="status" 
+            style="display: none; margin-bottom: 1rem;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+
+        <!-- Error message container (hidden by default) -->
+        <div id="error-message" 
+            class="alert alert-danger" 
+            role="alert" 
+            style="display: none; margin-bottom: 1rem;">
+        </div>
+
         <ul id="todo-list" class="list-group"></ul>
       </section>
+
     </div>
   </main>
 
