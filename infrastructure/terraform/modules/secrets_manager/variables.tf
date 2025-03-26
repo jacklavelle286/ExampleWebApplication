@@ -7,3 +7,8 @@ variable "mongo_port" {
 variable "mongo_dbname" {
   default = "mydatabase"
 }
+
+variable "secret_name" {
+  default = "mongo-connection"
+  
+}

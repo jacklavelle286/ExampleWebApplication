@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessage = document.getElementById("error-message");
 
   // Replace this with your actual backend endpoint
-  const API_URL = "http://YOUR-BACKEND-DNS:3000/api/todos";
+  const API_URL = "/api/todos";
 
   let todos = [];
 

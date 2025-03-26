@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "secret" {
-  name        = "mongo-secret"
+  name        = var.secret_name
   description = "MongoDB connection info"
 }
 

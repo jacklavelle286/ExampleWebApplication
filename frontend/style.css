@@ -216,53 +216,8 @@
     resize: vertical;
     min-height: 120px;
   }
-  
-  /* ================================
-     View Counter
-  =================================== */
-  .shadcn-counter {
-    font-size: 1.2rem;
-    margin: 1rem 0;
-    color: var(--text-color);
-  }
-  
-  /* ================================
-     Certification Section
-  =================================== */
-  .certification-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-    justify-items: center;
-  }
-  
-  .certification {
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .certification:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px var(--box-shadow);
-  }
-  
-  .certification-badge {
-    width: 100px;
-    transition: transform 0.3s ease;
-  }
-  
-  .certification-badge:hover {
-    transform: scale(1.1);
-  }
-  
-  .certification-title {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  
 
+  
   /* ================================
      Footer
   =================================== */

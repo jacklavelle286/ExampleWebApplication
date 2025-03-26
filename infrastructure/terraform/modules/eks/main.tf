@@ -20,6 +20,8 @@ data "aws_iam_policy_document" "eks_cluster_assume_role" {
   }
 }
 
+
+
 resource "aws_iam_role" "eks_cluster_role" {
   name               = "eks-cluster-role"
   assume_role_policy = data.aws_iam_policy_document.eks_cluster_assume_role.json
@@ -118,6 +120,7 @@ resource "aws_eks_fargate_profile" "this" {
   fargate_profile_name   = "fargate-profile"
   pod_execution_role_arn = aws_iam_role.fargate_pod_execution_role.arn
   subnet_ids             = var.private_subnets
+  
 
   selector {
     namespace = "default"
@@ -130,4 +133,23 @@ resource "aws_eks_fargate_profile" "this" {
   ]
 }
 
+# helm
 
+provider "helm" {
+  kubernetes {
+    host                   = data.aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.this.token
+  }
+}
+
+resource "helm_release" "myapp" {
+  name      = "myapp"
+  namespace = "default"
+
+  chart     = "../charts/myapp"
+  depends_on = [
+    aws_eks_cluster.this,
+    aws_eks_fargate_profile.this
+  ]
+}

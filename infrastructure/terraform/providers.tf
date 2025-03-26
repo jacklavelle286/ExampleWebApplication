@@ -2,8 +2,12 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.18.0"
+      version = "~>5.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
+    } 
   }
 
   backend "s3" {
@@ -14,3 +18,5 @@ terraform {
     dynamodb_table = "783764584115-us-east-1-backend-infra-tf-yt-lock"
   }
 }
+
+

@@ -7,11 +7,11 @@ app.use(cors());
 app.use(express.json()); // Parse JSON request bodies
 
 // 1. Connect to MongoDB
-//    Provide your connection string in an environment variable, e.g. MONGO_URI="mongodb://user:pass@<MongoHost>:27017/todosDB"
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect("mongodb://admin:SomeSecurePasswordHere@ip-10-0-1-50.ec2.internal:27017/mydatabase?authSource=admin", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  
 
 // 2. Define a Mongoose schema + model
 const todoSchema = new mongoose.Schema({

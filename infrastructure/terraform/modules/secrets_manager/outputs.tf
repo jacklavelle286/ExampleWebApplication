@@ -1,3 +1,3 @@
-# output "secret_arm" {
-#   value = aws_secretsmanager_secret.arn
-# }
+output "secret_arn" {
+  value = aws_secretsmanager_secret.secret.arn
+}
