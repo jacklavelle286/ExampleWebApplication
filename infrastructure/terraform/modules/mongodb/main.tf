@@ -49,7 +49,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_mongo" {
   from_port         = 27017
   ip_protocol       = "tcp"
   to_port           = 27017
-  cidr_ipv4 = "0.0.0.0/0" # lock this down with the EKS sg id 
+  cidr_ipv4 = "0.0.0.0/0" 
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all" {
@@ -85,7 +85,8 @@ data "aws_iam_policy_document" "permissions_for_mongo" {
     
         resources = [
         var.secrets_manager_arn,
-        var.s3_bucket_arn
+        var.s3_bucket_arn,
+        "${var.s3_bucket_arn}/*"
         ]
     }
 }

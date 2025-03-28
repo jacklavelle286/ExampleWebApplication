@@ -15,3 +15,9 @@ variable "region" {
   description = "AWS region to deploy the resources"
   
 }
+
+variable "image_id" {
+  type = string
+  description = "AMI ID for the EC2 instance"
+  
+}

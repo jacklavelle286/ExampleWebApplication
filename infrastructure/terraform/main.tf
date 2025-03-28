@@ -38,5 +38,6 @@ module "mongo_instance" {
   s3_bucket_arn = module.mongo_bucket.bucket_arn
   secrets_manager_arn = module.secret_manager.secret_arn
   instance_type = "t2.micro"
+  image_id = var.image_id
 
 }
