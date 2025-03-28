@@ -48,8 +48,6 @@ variable "trusted_repo" {
 
 
 
-
-
 # Resources
 
 
