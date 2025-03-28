@@ -76,17 +76,10 @@ data "aws_iam_policy_document" "permissions_for_mongo" {
         effect = "Allow"
     
         actions = [
-        "secretsmanager:GetSecretValue",
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:ListBucket",
-        "s3:DeleteObject"
+        "*"
         ]
-    
         resources = [
-        var.secrets_manager_arn,
-        var.s3_bucket_arn,
-        "${var.s3_bucket_arn}/*"
+        "*"
         ]
     }
 }
