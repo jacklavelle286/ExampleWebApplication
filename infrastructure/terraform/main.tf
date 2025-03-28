@@ -39,5 +39,6 @@ module "mongo_instance" {
   secrets_manager_arn = module.secret_manager.secret_arn
   instance_type = "t2.micro"
   image_id = var.image_id
+  secret_id = "mongo-${random_pet.secret_name.id}"
 
 }

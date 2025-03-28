@@ -26,3 +26,8 @@ variable "subnet_id" {
   
 }
 
+
+
+variable "secret_id" {
+  type = string
+}

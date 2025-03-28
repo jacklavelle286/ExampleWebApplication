@@ -3,11 +3,10 @@
 yum install -y jq
 
 SECRET=$(aws secretsmanager get-secret-value \
-  --secret-id mongo-secret \
+  --secret-id ${secret_id} \
   --region us-east-1 \
   --query SecretString \
   --output text)
-
 
 MONGO_USER=$(echo "$SECRET" | jq -r '.username')
 MONGO_PASS=$(echo "$SECRET" | jq -r '.password')
@@ -21,4 +20,3 @@ echo "  Mongo Pass: $MONGO_PASS"
 echo "  Host: $MONGO_HOST"
 echo "  Port: $MONGO_PORT"
 echo "  DB:   $MONGO_DB"
-
