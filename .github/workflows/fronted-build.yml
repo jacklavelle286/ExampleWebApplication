@@ -10,10 +10,16 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
 
+
     env:
       AWS_ACCOUNT_ID: "783764584115"
       AWS_REGION: "us-east-1"
       ECR_REPOSITORY_NAME: "my-frontend-repo"
+
+    permissions:
+      id-token: write
+      contents: read
+
 
     steps:
       - uses: actions/checkout@v4
