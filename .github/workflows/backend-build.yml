@@ -1,4 +1,4 @@
-name: Docker Image CI pipeline
+name: Backend Docker Image CI pipeline
 
 on:
   workflow_dispatch:
