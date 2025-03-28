@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let todos = [];
 
-  // Show/Hide Spinner
   function showSpinner() {
     loadingSpinner.style.display = "inline-block";
   }
@@ -18,20 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
     loadingSpinner.style.display = "none";
   }
 
-  // Show error message
   function showError(msg) {
     errorMessage.textContent = msg;
     errorMessage.style.display = "block";
   }
-  // Hide error message
   function hideError() {
     errorMessage.textContent = "";
     errorMessage.style.display = "none";
   }
 
-  // ----------------------------------
-  // Fetch existing to-dos from backend
-  // ----------------------------------
   async function loadTodos() {
     showSpinner();
     hideError();
@@ -41,20 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) {
         throw new Error(`Server returned ${res.status}`);
       }
-      todos = await res.json(); // an array of { _id, text }
+      todos = await res.json(); 
       renderTodos();
     } catch (error) {
       console.error("Error loading todos:", error);
       showError("Unable to load your to-dos. Please try again later.");
-      todos = []; // fallback to empty
+      todos = []; 
     } finally {
       hideSpinner();
     }
   }
 
-  // ----------------------------------
-  // Add a new to-do via the backend
-  // ----------------------------------
   async function addTodo(text) {
     showSpinner();
     hideError();
@@ -80,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ----------------------------------
-  // Delete a to-do from the backend
-  // ----------------------------------
+
   async function deleteTodo(id) {
     showSpinner();
     hideError();
@@ -104,11 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ----------------------------------
-  // Render the list of to-dos to the DOM
-  // ----------------------------------
+
   function renderTodos() {
-    todoList.innerHTML = ""; // Clear existing list
+    todoList.innerHTML = ""; 
     todos.forEach((todo) => {
       const li = document.createElement("li");
       li.classList.add(
@@ -119,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       li.textContent = todo.text;
 
-      // Delete button
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "Delete";
       deleteBtn.classList.add("btn", "btn-danger", "btn-sm");
@@ -132,9 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----------------------------------
-  // Handle form submission
-  // ----------------------------------
+
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = todoInput.value.trim();
@@ -144,6 +128,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initial load of to-dos
   loadTodos();
 });

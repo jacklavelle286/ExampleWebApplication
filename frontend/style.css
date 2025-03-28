@@ -1,19 +1,12 @@
-/* style.css */
-
-/* ================================
-   CSS Variables & Global Styles
-=================================== */
 :root {
-  /* Color Palette */
-  --primary-color: #1D4ED8;       /* A refined blue accent */
-  --secondary-color: #2563EB;     /* A complementary blue tone */
-  --accent-color: #10B981;        /* A subtle green for buttons */
-  --background-color: #f8f9fa;    /* Light background */
-  --text-color: #333333;          /* Dark text */
-  --border-color: #e0e0e0;        /* Soft borders */
-  --box-shadow: rgba(0, 0, 0, 0.05); /* Light shadow */
+  --primary-color: #1D4ED8;       
+  --secondary-color: #2563EB;     
+  --accent-color: #10B981;        
+  --background-color: #f8f9fa;    
+  --text-color: #333333;         
+  --border-color: #e0e0e0;      
+  --box-shadow: rgba(0, 0, 0, 0.05); 
   
-  /* Component-specific */
   --navbar-bg: #ffffff;
   --navbar-text: #333333;
   --btn-bg: var(--accent-color);
@@ -31,9 +24,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ================================
-   Dark Mode Overrides
-=================================== */
 body.dark-mode {
   --primary-color: #3B82F6;
   --secondary-color: #60A5FA;
@@ -49,12 +39,11 @@ body.dark-mode {
   --input-bg: #1f2937;
 }
 
-/* Dark Mode for Navbar Links */
+
 body.dark-mode .navbar .nav-link {
   color: var(--navbar-text) !important;
 }
 
-/* Dark Mode for list-group items */
 body.dark-mode .list-group,
 body.dark-mode .list-group-item {
   background-color: var(--background-color) !important;
@@ -62,9 +51,7 @@ body.dark-mode .list-group-item {
   border-color: var(--border-color) !important;
 }
 
-/* ================================
-   Navbar
-=================================== */
+
 .navbar {
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--border-color);
@@ -99,7 +86,6 @@ body.dark-mode .list-group-item {
   border-bottom: 2px solid var(--primary-color);
 }
 
-/* Dark Mode Toggle Button */
 .navbar-darkmode {
   background-color: var(--primary-color);
   border: none;
@@ -120,9 +106,7 @@ body.dark-mode .list-group-item {
   background-color: var(--secondary-color);
 }
 
-/* ================================
-   Main Content Area
-=================================== */
+
 .shadcn-main {
   display: flex;
   flex-direction: column;
@@ -145,9 +129,7 @@ body.dark-mode .list-group-item {
   text-align: center;
 }
 
-/* ================================
-   Headings & Text
-=================================== */
+
 .shadcn-heading {
   font-size: 2rem;
   font-weight: 700;
@@ -160,9 +142,7 @@ body.dark-mode .list-group-item {
   margin-bottom: 1rem;
 }
 
-/* ================================
-   Buttons
-=================================== */
+
 .shadcn-button {
   background-color: var(--btn-bg);
   color: var(--btn-text);
@@ -180,9 +160,7 @@ body.dark-mode .list-group-item {
   transform: translateY(-2px);
 }
 
-/* ================================
-   Form Styles
-=================================== */
+
 .shadcn-form {
   display: flex;
   flex-direction: column;
@@ -217,9 +195,6 @@ body.dark-mode .list-group-item {
   min-height: 120px;
 }
 
-/* ================================
-   Footer
-=================================== */
 .shadcn-footer {
   background-color: var(--navbar-bg);
   padding: 1rem;
@@ -234,9 +209,7 @@ body.dark-mode .list-group-item {
   color: var(--text-color);
 }
 
-/* ================================
-   Responsive Styles
-=================================== */
+
 @media (max-width: 768px) {
   .navbar .navbar-nav {
     flex-direction: column;
@@ -252,9 +225,7 @@ body.dark-mode .list-group-item {
   }
 }
 
-/* ================================
-   Dark Mode: Card & Button overrides
-=================================== */
+
 body.dark-mode .card,
 body.dark-mode .card-body {
   background-color: var(--background-color) !important;

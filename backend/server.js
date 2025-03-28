@@ -34,7 +34,6 @@ app.get("/api/todos", async (req, res) => {
   }
 });
 
-// POST create a new todo
 app.post("/api/todos", async (req, res) => {
   try {
     const newTodo = new Todo({ text: req.body.text });
@@ -46,18 +45,16 @@ app.post("/api/todos", async (req, res) => {
   }
 });
 
-// DELETE a todo by ID
 app.delete("/api/todos/:id", async (req, res) => {
   try {
     await Todo.findByIdAndDelete(req.params.id);
-    res.status(204).end(); // No content on success
+    res.status(204).end(); 
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// 4. Start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Todo backend listening on port ${port}`);
