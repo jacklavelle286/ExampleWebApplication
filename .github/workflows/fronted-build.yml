@@ -16,32 +16,31 @@ jobs:
       ECR_REPOSITORY_NAME: "my-frontend-repo"
 
     steps:
-      # 1) Check out code
       - uses: actions/checkout@v4
 
-      # 2) Configure AWS Credentials (via your OIDC role)
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::783764584115:role/OIDCRole
           aws-region: ${{ env.AWS_REGION }}
 
-      # 3) Login to ECR
       - name: Log in to ECR
         run: |
           aws ecr get-login-password --region $AWS_REGION \
             | docker login --username AWS \
             --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
-      # 4) Build and tag the Docker image
       - name: Build Docker image
         run: |
-          # We'll tag the image with the short Git commit SHA for uniqueness
-          docker build -t $ECR_REPOSITORY_NAME:${GITHUB_SHA} .
-          docker tag $ECR_REPOSITORY_NAME:${GITHUB_SHA} \
-            $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:${GITHUB_SHA}
+          docker build \
+            -f ./frontend/Dockerfile \
+            -t $ECR_REPOSITORY_NAME:latest \
+            ./frontend
 
-      # 5) Push the image to ECR
+          # Re-tag for ECR
+          docker tag $ECR_REPOSITORY_NAME:latest \
+            $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:latest
+
       - name: Push to ECR
         run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:${GITHUB_SHA}
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:latest
