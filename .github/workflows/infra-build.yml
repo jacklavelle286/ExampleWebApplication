@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  id-token: write   
+  id-token: write
   contents: read
 
 jobs:
@@ -14,30 +14,38 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      # Non-secret variables are fine to define here.
       AWS_REGION: "us-east-1"
       AWS_ACCOUNT_ID: "783764584115"
+      # If you don't mind committing the AMI ID, you can also store it here:
+      IMAGE_ID: "ami-01a228f15911e06f6"
 
     steps:
+      # 1) Check out repository
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 2) Build dynamic environment variables
       - name: Set dynamic environment variables
         run: |
           echo "S3_BACKEND_BUCKET=${AWS_ACCOUNT_ID}-${AWS_REGION}-backend-infra-tf-yt" >> $GITHUB_ENV
           echo "DYNAMO_LOCK_TABLE=${AWS_ACCOUNT_ID}-${AWS_REGION}-backend-infra-tf-yt-lock" >> $GITHUB_ENV
           echo "ROLE_TO_ASSUME=arn:aws:iam::${AWS_ACCOUNT_ID}:role/OIDCRole" >> $GITHUB_ENV
 
+      # 3) Configure AWS Credentials (OIDC)
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ env.ROLE_TO_ASSUME }}
           aws-region: ${{ env.AWS_REGION }}
 
+      # 4) Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.5
 
+      # 5) Terraform Init
       - name: Terraform Init
         run: |
           cd infrastructure/terraform
@@ -47,12 +55,29 @@ jobs:
             -backend-config="region=${{ env.AWS_REGION }}" \
             -backend-config="key=terraform.tfstate"
 
+      # 6) Terraform Plan
       - name: Terraform Plan
+        # Pull secrets from GitHub -> environment variables
+        env:
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         run: |
           cd infrastructure/terraform
-          terraform plan -var="region=${{ env.AWS_REGION }}"
+          terraform plan \
+            -var="region=${{ env.AWS_REGION }}" \
+            -var="image_id=${{ env.IMAGE_ID }}" \
+            -var="mongo_username=${{ env.MONGO_USERNAME }}" \
+            -var="mongo_password=${{ env.MONGO_PASSWORD }}"
 
+      # 7) Terraform Apply
       - name: Terraform Apply
+        env:
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         run: |
           cd infrastructure/terraform
-          terraform apply -auto-approve -var="region=${{ env.AWS_REGION }}"
+          terraform apply -auto-approve \
+            -var="region=${{ env.AWS_REGION }}" \
+            -var="image_id=${{ env.IMAGE_ID }}" \
+            -var="mongo_username=${{ env.MONGO_USERNAME }}" \
+            -var="mongo_password=${{ env.MONGO_PASSWORD }}"
