@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.getElementById("loading-spinner");
   const errorMessage = document.getElementById("error-message");
 
-  // Replace this with your actual backend endpoint
+
   const API_URL = "/api/todos";
 
   let todos = [];

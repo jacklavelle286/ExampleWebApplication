@@ -5,19 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Simple Application</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid justify-content-center">
-      <!-- Toggler/collapsible Button -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Collapsible content -->
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-evenly text-center">
           <li class="nav-item">
@@ -28,7 +38,9 @@
           </li>
           <li class="nav-item">
             <!-- Dark mode button with correct ID -->
-            <button id="dark-mode-toggle" class="btn btn-primary navbar-darkmode">🌙</button>
+            <button id="dark-mode-toggle" class="btn btn-primary navbar-darkmode">
+              🌙
+            </button>
           </li>
         </ul>
       </div>
@@ -37,58 +49,118 @@
 
   <!-- Main Content -->
   <main class="shadcn-main">
-    <!-- One Unified Content Box -->
-    <div class="content-box">
+    <!-- Intro Box -->
+    <div class="content-box mb-4">
       <section class="intro-section">
         <h1 class="shadcn-heading">My To-Do-List Application &#128203;</h1>
-        <br>
         <p class="shadcn-text">
-          Welcome to my simple to-do-list web application, which is designed to showcase my proficiency in building stable, secure and reliable applications in AWS (and will scale to millions of users, despite never needing to!).
+          Welcome to my simple to-do-list web application, which is designed to
+          showcase my proficiency in building stable, secure, and reliable
+          applications in AWS (and will scale to millions of users, despite never
+          needing to!).
         </p>
       </section>
-      
+
       <!-- Diagram Section -->
       <section class="diagram-section mt-4">
         <h2 class="shadcn-heading">Application Diagram</h2>
         <p class="shadcn-text">
           Below is the diagram of the application architecture.
         </p>
-<iframe frameborder="0" style="width:100%;height:914px;" src="https://viewer.diagrams.net/?lightbox=1&highlight=0000ff&nav=1&dark=0#R%3Cmxfile%3E%3Cdiagram%20name%3D%22Page-1%22%20id%3D%22aNb2FgmZO5IkZn5BL6Yg%22%3E7V3bcqM6Fv0aV8082IW48%2BhrOjXprkznzPScp5QMMmaCkQ%2BIxOmvPxIgDEg2jmNy6aY7lZiNkIS01r5IGzzQppvdVQy366%2FYQ%2BFAVbzdQJsNVNXUFI3%2BYZLnXAIsS8klfhx4hWwvuAt%2BokLIi6WBh5JaQYJxSIJtXejiKEIuqclgHOOnerEVDuutbqGPBMGdC0NR%2BiPwyLq4MUfZy7%2BgwF8XLTt2cWIDedlCkKyhh58qIm0%2B0KYxxiT%2FtNlNUcgGjw9Lft3iwNmyXzGKyCkXfLv98jC%2BuTL%2F%2BLf9%2FTr40wDKcDksanmEYVrc7%2FjHHRVMQ5x6Rb%2FJMx%2BLLQ4iko2nMaE%2FtL2pMjDomSk7GqlGQ9A8tuoCIB6xOuqC5rFVF4Bm9aDRPmh2sCIQjmrVK432lUoH6Y82wSkJgwhNS%2BQpVOjH0AvolExxiGMqi3BER2%2ByJpuQHgH68WkdEHS3hS4b1SdKGypb4YgU2AcqPy4GntVK0U0gbSsu6shmAsXzR5RPSF4mDOE2CZblVTFy0zgJHtF3lOSVMykF4pZ93ux8xtkRfEr0kR%2FjdJt1%2F5q2JT17Tz%2FeuwwY9zAkrCIS4wfEb3SgavT%2FgoFvsgrCsDEAjygmAaXVOAx8Vj%2FBrDlYHIVoldVIRyWI%2FJvsaKYpxUjImvBgskZecUsFimkTaHeQHqAkHdVWCG8QiZ9pkeKCoW4WRC00lVYcPu1ZDzQuXFcpz1UVLFSNX1a%2BpyP9UDDyBexUBXamyRDBhHDe9tzsuZlzM0Z%2BwM6JpFSUsT42OyUl0K35ZFwlJTiVlIet0kGmanWeGhKelsIqT23N7oinlsDT66sfAkOTB0TcdTHRUnwe0nUHcFudUFrcnuqLxUKAQFG4pi%2F5vN%2FAJQpvcRKQDDyzJSYEb1qB4SIG8Dpz2lgCk21%2Bo6tgx%2Foh0AQcgn9WLELk3ocEPcHnV0FLPQotx3Fq2LIcAVu6BFl6VwZAF4D139tpr%2Fp71V9V%2FY9bV5Up%2FlIfdKf4x%2BOJNbHP8sbOYCfQ6uy0Rc3vKECkp6F1xU%2BgCQQdqGbmHLORqtHU%2FCvF%2FMQwn%2FcxLeBsd9mQ8dP0k1%2F8hRs2KdEy2WbHygmi0j9c8n7Q%2B8q7wqt9sVXqhjrnRyGPMAjhMggD8nz%2FM%2B%2BLgH1DNyam3in2yyYu5PToLeFJ3etRTVsEvy0Bv6aqXYFfDE9eCn6gvAr9Jdphj%2FZfGu1DTT0N7aVNuDjaHQHst%2BkyDFyGr3RJ3VMGZ9j7Zr1vVqVvwqpj1N0XvsvYyytuUtkajwFoRutUvlAX5ty%2BHJ9V3bZBjc%2Bv89yO81lXzbaYXVN0kc6gMzrbAp2%2FQUbhqyLG7IP3ywTvEbxM3O60RAZ6DV%2B6BF%2BmxDcyu3KNRHhJrMWytxa9teitRau10MC7mwu%2BiVvdKL05J7zorYSMHHC7pcoRsi7ehxh690sYwsjNOtAVymxQR5lsw8%2BQgIzLLo8xcTP%2BNg4eqfHsY4zealzQakh3BKl8bi7MhXU5qyFuC3ZpNRrbgjIX0JL4gMDpzGaI62MyPvdeYM%2Fnns8in9U6n6VOoC0jdHdOoHS354xdmrNF45TghE4knSe2VpHho6k9mpg%2B0c8rpv8PdnY2VAfSxWTaYOSVMy9jWIWAAk7nMwsoewTzdEp10FhVbrJQZBzabWHEuyGnX2ewbAQnppgiAHgmWS1HAICuYClmCRwPTKT2RWpjZHZGamtEe1MrllkASQtNoUxmiUIgFuNGQxTKZDIL2bwaSK4GjasP26dDcV5TRdcpUTmzyv59xKhOathilOA0dlFu1ignE5mBg1R%2F3RcKTH0VSXNdLLL0vTJ1VHHFb%2F4vlkn9DbP0dVX5xyKmA4uo1qKts99NZZ9vYHrBI9%2B8XEL3gZb%2FZ2Vvs3K2p3hP8Y9IcfSQdELsohrDYPNVtb9AsL%2B6IyG%2B0xXxxY3hnvg98Xvid0181Xln5muim408H%2FHxxTFZYx9HMJzvpY0Ial%2FmBmeBF5u0%2FyNCnotZYw5TfUrpIMbP%2F2PXjxzL4oI%2FMwFFIhfMdjxUyo6eq0e3KA7oEGTx1T5UYn0%2FI1Ci95%2BB49jMFk4XgbGPzoFAjEJIaIBX655sPrNLx3HMNvDLAoVK3Nd8ywSVjQBdqwMLNB6ka5Q3eY7pmeWBqTewl%2Fd4j8Ty1l8BTu1dwQlGimLWwWlpoAfnGeCsg4c%2FgXYq2F5c3jpeXrOtY%2BU7ArO4wvEVRz6esTWy6yghbK%2Bw94t6v%2BhD%2BkXu61Y6ji9HgiZ%2FTU3wimQPw3HZ5b0i8dHUt%2FWKjKrZaTM551oX7vq1WRftzazL6yZNTG%2BZT7%2F3GrXXqB9To74uL0g9qlF1pb7BY0k2Hi1b1KhWV08Xa%2BIKU%2F6Sjjs6EIg5j8pXGEGfTklP2M9B2NlM0%2FXpb0PYJAfq%2FaaAaXfkNRpZQO9OXr7h9LbuUNduDV%2F0bnVrtAN5%2B90GzYZVR4H%2BFkEqD9SranoDf1I2UE1NvTtlkroPWcrXGodelsHRuhOwj3In0H1It0m%2FJfCp9X6Zr%2F%2Bb6H2tQ1Wv8kjzo6h6w%2FgVVT1Pd2%2BPYJX3jGANcYkwe4ddtvna68dPoh8PPN%2Fyq%2BrH7GV6qwyhHb41BTRfHeGIr454W5%2F4XTZOT1CUfOmydVXPOFEn5j7hu63qGYJO7POVP3W%2B8gE48bdmqE2m842z1uRkpasnofkj1n1y8uezxr%2FZsvLlkpNzxftxkpN185MbXP3UIEQ%2FMPJvY3B1MQi5CsiXdEll39GWMQLH4rtFaiSSErYyqgJbwgbbyhNn0rHJoCe0DOnMJyM%2FIOt0eQk75Th1O6UDQ%2FRIDYlHanQ1cdZnJ8ipHulrHdKz1mOHJmhMuKFW56z9Aq2eY9fRCq5ko23%2FYoJsBTcIPSlSMo61ELVJt03geTmQmB8I995i3QWaHTNFxbceFBcPyocm27NKrKMUVUamUySSvAwa%2B6nkRfBqlSAiUPQS82X3rP3QrDXsN2Atz2R6cZR7Ha1iSF3b1CVpjH4xettt9AZ8FYjHih%2Be7eJqRulcjV2moRNh7rgvE2yyb3lpd4kyZ4rttfmZnuAhj4dWMM023g6EMM0wJGtwzKUKl9DPa0LYN9eM2fioi4TQ0XaHijIK6Fx7qfswcmlH1AVM6DAmIxp%2BqYvc8YL5PQ5ZwaGq6PaO%2FRoG27%2Fwk2rtRtvIv9AygmXWc3x1IOYUWtZI5qCV0ssv8H%2F2GKZQnu3K3jiQ8flGGylqixP0n0SSaFQZslaOySMYkXTVdYYDoYqwLid5N4atLJQ8rMm%2FfklpLls0A54AJ1ZGx2SUJqdnqxwnldNYmtNsVeSUZE3AevmaAD3cf6tUrn33382lzf8G%3C%2Fdiagram%3E%3C%2Fmxfile%3E"></iframe>      </section>
+        <iframe frameborder="0" style="width:100%;height:913px;" src="https://viewer.diagrams.net/?lightbox=1&highlight=0000ff&nav=1&dark=0#R%3Cmxfile%3E%3Cdiagram%20name%3D%22Page-1%22%20id%3D%22aNb2FgmZO5IkZn5BL6Yg%22%3E7V1rc5s6Gv41ntn9YA%2Fizkdf08y2nWxzdrvnU0YGGbPByAdE4vTXrwQIg6TEl5rG2dJmEngRktD7PO9FEvbAmG52Nyncrr%2FgAMUDXQt2A2M20HXTtSz6h0leSgnQTa%2BUhGkUVLK94D76gSqhVknzKEBZqyDBOCbRti30cZIgn7RkME3xc7vYCsftVrcwRJLg3oexLP0eBWRdSm1P28s%2FoShcVy17bnVhA3nZSpCtYYCfGyJjPjCmKcakPNrspihmg8eHpbxv8crVul8pSsgxN3y9%2B%2FQ4%2Fnxj%2F%2FFP99tt9KcFtOFyWNXyBOO8et7x93sqmMY4D6p%2Bkxc%2BFlscJaQYT2tCf2h7U21g0StTdjbSLUEgnjttAZDPWB1tgXjutAVArB4I7QOxgw2BdNaqXhPa1xodpD%2FGBOckjhI0rZGnUWGYwiCiKpniGKdUluCEjt5kTTYxPQP08HkdEXS%2FhT4b1WdKGypb4YRU2Ac6P68GntVK0U0gbSut6ig0gdL5EyoVUpaJY7jNomV9V4r8PM2iJ%2FQNZWXlTEqBuGXHm13IODuCz5k5ClOcb4vu39K2lFcf6OGDz4DxAGPCKiIpfkT8QQe6Qf8vGPgmqyiOhQF4QimJKK3GcRSy%2BglmzcHqLEarokY6KlESfi7OZoZWjYSqiQBmaxRUjyRzgQObtop2DVHFjRuEN4ikL7RIdXVo2hVRK0tlVKfPe9YDgwvXTcpzUwUrUxPWle%2FpSA8qRp7ATl1iZ54NEcwI523PzZ6bJTdTFEbsmkxKTRubY7tTUgLTmU%2FGTVICJSnfdEFHM9Vo89RS8LQWNnnqGm5HPHUknt7efJcYmj0i4q8rRSvx%2BZqtewW3TYXS4u7UXCwWEgSqwi17yfX%2BGS5RfIeziBTgmS0xIXhzEBg%2BYgBvM%2BcQS2C2LR90Fe1YPySagNfgXxRLEHkIIUHP8OV4aOmnQsvzvBa2HE%2FClqlAltmVAzAlYP37btqb%2Ft70N03%2F09bXVYa%2FtgfdGf7xeOJM3MPR2GXYCYw2O13Z8nsakOlpGV3xExgSQQe6XQTHbKRaNLX%2FyjG%2FMCz1PqYFvO2uGDJ%2BmR6F1V%2B4YUpJltm2ONeOENXx4ZL3gz5X2RVe7cleqRvqnJ%2BFPMEohssojsjLw4%2ByLxL2LdOa2Gan2K%2BbOCfoMU%2FF%2FtBsRz267crgdxXgN3S9K%2FDL6cmp4AfaT6G%2FRjvs0f5%2FjfahoR%2BH9tonXBztngT2u3wZRz7DV76k4SmDM%2Bxjsz42a9I3Y9Ux6u4L3xfs5RWLVHbGYwDEbJ3KF%2FrCnruX47Nuui5o8fmEyO1kPpu6fShnNzRTpjPojM6uROevkFH4psox%2B%2BT9Msl7As%2FI271T8QUMs4UvU4EvWxEb2V2FRjK8FN5i2XuL3lv03uKgtzDAu7sLvojbXCj9fE560XsJFTngdkuNI2RdfIgxDB6WMIaJX3SgK5S5oI0y1YKfpQAZl10eY%2FJi%2FF0aPVHn2ecYvde4oNdQrghS%2Bdxe2Avncl5DXhbs0msIy4KqENBRxIDA68xnyPNjKj73UWDP557PMp%2F1Np%2BVQaCrInR3QaByteeMVZqzReOc4IwqkuqJzVUU%2BBCth4jpI%2BO8Sv1%2FsKuzoT5QTibTBpOg1ryKYQ0CSjidzxyg7RHMt1PqA2FWWWShzDi028KEd0NNv85gKSQntrxFAPCdZK09AgB0BUt5l8DbiYnSvyh9jMrPKH2N7G9axQoPoGhBFKpkjiwEcjHuNGShSqbykOLdQHE3EO5%2B3T%2B9lueJJrpNicaVVfHvGrM6pWNLUYbz1EelW6OczFQODlL79VAZMP14ktaG9zBL32unji7P%2BM3%2FwXZSf8Vs%2B7qu%2FW2R0oFF1GrR1tlv0diXC5hB9MQXL5fQf6Tl%2F95Y22xc7SneU%2FwaKY4es06IXV21rJHV9r9A8r%2F8DZMW8b2uiC8vDPfE74nfE79r4uveOzPfkMNsFISIjy9OyRqHOIHxfC8VMqh9mc%2B4SLyY0v6LCHmptMYCprZK6bimL%2F9h9488x%2BGCPwsBRSIXzHY8VSrOXppndyiN6BAU%2BdXpqVKJhbd0W8VYBKYhOgYEbNTehECKYkhogtcopNZnces4TdkCfl2gMon7mu%2BYoLEQYBptYAHhRTqhvM33mJ5ZHtimgL2yx3sk1o%2F%2BE%2BA03hWcYKRpdhucjgF6cJ4BzjZ4%2BBtox4Lt5PLO2%2BUN13mrfEdglmc4vuAkxDM2R3abZIStFfZxUR8XXWVc5J8w03HydCQQ%2BWsbUlSkehmOyy4fFcmvpv7aqMhqup1DLufYcPVI72K8n3f5OaXJ21vm02%2B9Re0t6nVa1BP2BfFF%2BON3n2ntBR5HsfDouLJFdbp6u9iQZ5jKD%2Bm4pwOBWPCofYEJDKlKesJ%2BDMLOZoZpTn8bwmYlUB82FUy7I68l7AJ6d%2FLyBadfGw5dOKzhc9wHwxpuqt45abYcYS%2FYr0hSeaLeNNMb%2BIOygVpqGu5pk9x%2FLLZ8rXEcFDs4Dq4E7LPcCfQf823WLwl8aLtf79f%2FTey%2B0aGp13mmeTWm%2Fl3WA%2BTh5Qn4wWTVOtKqc8t2LcmqJRnafhvex9mGx93k8S%2BD6%2BJnH%2FD54IN77rSuXvDjbw72e%2B4%2BnhP%2BzWZLztxzV1vZ691zZ9ofy%2BGa5rEO17oqh2vKy283EfmUL6nsG9oyRuBUfmW%2BRSIlYRujKrElFthWXziTjiKDntEypprPRmFE1vnyEn7K89p%2BygSWHJFaiojU6kpxzgcjyLER6cUD0rOmGYY2EBRu6U2dHb7BaG8d6WhiQjF%2FvH%2FftpiYiOJAiZSCYweIKtJtEwVBCSQWB8J9tNgOgWbHuyIOY4mK9ad%2BV60Mmp%2BsraKoNrK9auXtNGjsVcmL4NUqY7M5AkUvoS%2B3Z%2B1Vs9ZyfwFr%2BQL9yVnubbJKIQ1tc5%2FkKfoI9OavTlyC3sBzW7rSr57t8mxGHVyNfWahM0l3PJaJNsWXFxwOiYpgik0hh4Wd4ClPgFYwL%2BaTX0lhxDSkaHDMpRqX0OM1IewLGcZsfPRFRuho%2B0NNG0VUhUHuP4582hF9ATM6jNmIpl%2F6ogy8YPmMQ1ZwqGumu2O%2FhtH2L%2FysO7vRNgkvNI3g2O2tayaQt8o4zkgVoNXSi4do1gfLYSpbecQOF60Tay9ZZ8d1Ba067SrKnlZ3XZ6%2FfEBeja7%2BlSkW5hu6OEhedWoks7k5gfFKDiRN%2BCneJXe1hVbmS%2BXXlWjifIiYSUU4cwqeZ6M8e2V192S2esKcn%2BHqMlkVkw3O6ZMN9HT%2FLSwlLPbfZWPM%2Fwc%3D%3C%2Fdiagram%3E%3C%2Fmxfile%3E"></iframe>      </section>
+    </div>
 
-      <!-- Architecture Explanation Section -->
-      <section class="architecture-section mt-4">
+    <!-- Architecture & Wizexercise Section -->
+    <div class="content-box">
+      <section class="architecture-section">
         <h2 class="shadcn-heading">Architecture Overview</h2>
         <p class="shadcn-text">
-          The solution is built using a multi-layered architecture to ensure scalability, security, and maintainability. Key components include:
+          The solution is built using a multi-layered architecture to ensure
+          scalability, security, and maintainability. Key components include:
         </p>
-        <ul class="list-group list-group-flush text-start">
-            <li class="list-group-item">
-              <strong>Web Application Tier:</strong> Containerized frontend (HTML, CSS, Bootstrap, and JavaScript) and backend (e.g., Python) deployed on a Kubernetes cluster for a responsive and interactive user interface.
-            </li>
-            <li class="list-group-item">
-              <strong>Database Layer:</strong> A MongoDB server hosted on a dedicated EC2 instance with authentication, configured for secure access by the Kubernetes cluster.
-            </li>
-            <li class="list-group-item">
-                <strong>MongoDB Backups:</strong> Periodic MongoDB backups taken daily at 9am UTC using a bash scipt on the VM, then pushed to Amazon S3 for easy retrieval. Lifecycle policies enabled on the S3 bucket to archive and remove old backups.
+
+        <!-- Using a Bootstrap Card -->
+        <div class="card border-0 mb-4">
+          <div class="card-body text-start">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Web Application Tier:</strong> Containerized frontend
+                (HTML, CSS, Bootstrap, and JavaScript) and backend (Node.js) deployed
+                on a Kubernetes cluster for a responsive and interactive user interface.
               </li>
-            <li class="list-group-item">
-              <strong>Infrastructure:</strong> All components are provisioned and managed using Terraform, including the Kubernetes cluster, load balancers, rest of the architecture setup.
-            </li>
-            <li class="list-group-item">
-              <strong>Additional Components:</strong> Integrated security using AWS Secrets Manager, hosted within an Amazon VPC with CI/CD pipelines deployed via GitHub Actions for continuous integration and delivery.
-            </li>
-          </ul>
-          
+              <li class="list-group-item">
+                <strong>Database Layer:</strong> A MongoDB server hosted on a
+                dedicated EC2 instance with authentication, configured for secure
+                access by the Kubernetes cluster.
+              </li>
+              <li class="list-group-item">
+                <strong>MongoDB Backups:</strong> Periodic MongoDB backups taken
+                daily at 9am UTC using a bash script on the VM, then pushed to
+                Amazon S3 for easy retrieval. Lifecycle policies enabled on the
+                S3 bucket to archive and remove old backups.
+              </li>
+              <li class="list-group-item">
+                <strong>Infrastructure:</strong> All components are provisioned
+                and managed using Terraform, including the Kubernetes cluster,
+                load balancers, rest of the architecture setup.
+              </li>
+              <li class="list-group-item">
+                <strong>Additional Components:</strong> Integrated security
+                using AWS Secrets Manager, hosted within an Amazon VPC with CI/CD
+                pipelines deployed via GitHub Actions for continuous integration
+                and delivery.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Show Wizexercise File as a Notice or Link -->
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Special File</h5>
+            <p class="card-text">
+              We also have a dedicated file named <code>wizexercise.txt</code> in our container image.
+              You can <strong>view</strong> or <strong>download</strong> it below:
+            </p>
+            <!-- View link -->
+            <a
+              href="wizexercise.txt"
+              target="_blank"
+              class="btn btn-primary mx-2 my-1"
+              rel="noopener noreferrer"
+            >
+              View wizexercise.txt
+            </a>
+            <!-- Download link -->
+            <a
+              href="wizexercise.txt"
+              download="wizexercise.txt"
+              class="btn btn-secondary mx-2 my-1"
+            >
+              Download wizexercise.txt
+            </a>
+          </div>
+        </div>
+      </section>  
+        </div>
       </section>
     </div>
   </main>
 
-  <!-- Bootstrap JS (for the collapse functionality) -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Dark Mode Script -->
   <script src="script.js"></script>
+  <!-- Additional Scripts -->
   <script src="index.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  ></script>
 </body>
 </html>

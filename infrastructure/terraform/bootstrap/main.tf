@@ -13,9 +13,9 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-######################
+
 # Variables
-######################
+
 variable "region" {
   description = "AWS region"
   type        = string
@@ -47,9 +47,9 @@ variable "trusted_repo" {
 }
 
 
-######################
+
 # Resources
-######################
+
 
 # OIDC Provider
 resource "aws_iam_openid_connect_provider" "oidc" {
@@ -117,9 +117,9 @@ resource "aws_dynamodb_table" "lock" {
   }
 }
 
-######################
+
 # Outputs
-######################
+
 output "oidc_role_arn" {
   description = "ARN of the OIDC IAM Role"
   value       = aws_iam_role.oidc_role.arn

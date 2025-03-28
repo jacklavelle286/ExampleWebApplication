@@ -10,8 +10,8 @@ variable "mongo_password" {
 
 }
 
-variable "mongo_host" {
+variable "region" {
   type = string
-  description = "value for mongo host"
-
+  description = "AWS region to deploy the resources"
+  
 }

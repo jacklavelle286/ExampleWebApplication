@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install jq if not already present, so we can parse JSON
+
 yum install -y jq
 
 # Retrieve the secret (replace with your region and secret name)

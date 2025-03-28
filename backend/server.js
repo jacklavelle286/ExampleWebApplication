@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json()); // Parse JSON request bodies
 
 // 1. Connect to MongoDB
-mongoose.connect("mongodb://admin:SomeSecurePasswordHere@ip-10-0-1-50.ec2.internal:27017/mydatabase?authSource=admin", {
+mongoose.connect("mongodb://admin:SomeSecurePasswordHere@10.0.3.50:27017/mydatabase?authSource=admin", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

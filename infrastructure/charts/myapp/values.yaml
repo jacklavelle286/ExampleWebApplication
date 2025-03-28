@@ -1,19 +1,13 @@
 replicaCount: 1
 
 backend:
-  image:
-    repository: "783764584115.dkr.ecr.us-east-1.amazonaws.com/backend-ecr-repo"
-    tag: "latest"
-  service:
-    type: ClusterIP
-    port: 3000
-  env:
-    MONGO_URI: "mongodb://admin:SomeSecurePasswordHere@ec2-3-92-61-123.compute-1.amazonaws.com:27017/db?authSource=admin"
+  image: "783764584115.dkr.ecr.us-east-1.amazonaws.com/backend-ecr-repo:latest"
+  port: 3000
+  tag: "latest"
 
 frontend:
-  image:
-    repository: "783764584115.dkr.ecr.us-east-1.amazonaws.com/frontend-ecr-repo"
-    tag: "latest"
-  service:
-    type: LoadBalancer
-    port: 80
+  image: "783764584115.dkr.ecr.us-east-1.amazonaws.com/frontend-ecr-repo:latest"
+  port: 80
+  tag: "latest"
+
+mongoUri: "mongodb://admin:SomeSecurePasswordHere@10.0.3.50:27017/mydatabase?authSource=admin"

@@ -1,11 +1,14 @@
+
+
 resource "aws_ecr_repository" "frontend" {
-  name = "frontend-ecr-repo"
+  name         = "frontend-ecr-repo"
+  force_delete = true
 }
 
 resource "aws_ecr_repository" "backend" {
-  name = "backend-ecr-repo"
+  name         = "backend-ecr-repo"
+  force_delete = true
 }
-
 
 
 # EKS Cluster IAM Role
@@ -20,79 +23,74 @@ data "aws_iam_policy_document" "eks_cluster_assume_role" {
   }
 }
 
-
-
 resource "aws_iam_role" "eks_cluster_role" {
   name               = "eks-cluster-role"
   assume_role_policy = data.aws_iam_policy_document.eks_cluster_assume_role.json
 }
 
-# Attach AWS-managed policies needed by the EKS cluster
-resource "aws_iam_role_policy_attachment" "eks_service_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "eks_service_policy_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = aws_iam_role.eks_cluster_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "eks_cluster_policy_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.eks_cluster_role.name
 }
 
-data "aws_iam_policy_document" "pull_ecr_image" {
+
+# Worker Node Group IAM Role
+
+data "aws_iam_policy_document" "eks_nodes_assume_role" {
   statement {
-    actions = ["ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage", "ecr:BatchCheckLayerAvailability"]
-    resources = [aws_ecr_repository.frontend.arn, aws_ecr_repository.backend.arn]
-  }
-}
-
-
-# EKS Fargate Pod Execution Role
-
-data "aws_iam_policy_document" "eks_fargate_assume_role" {
-  statement {
-    actions = ["sts:AssumeRole"]
+    actions    = ["sts:AssumeRole"]
     principals {
       type        = "Service"
-      identifiers = ["eks-fargate-pods.amazonaws.com"]
+      identifiers = ["ec2.amazonaws.com"]
     }
   }
 }
 
-resource "aws_iam_role" "fargate_pod_execution_role" {
-  name               = "eks-fargate-pod-execution-role"
-  assume_role_policy = data.aws_iam_policy_document.eks_fargate_assume_role.json
+resource "aws_iam_role" "eks_node_group_role" {
+  name               = "eks-node-group-role"
+  assume_role_policy = data.aws_iam_policy_document.eks_nodes_assume_role.json
 }
 
-# Attach AWS-managed policy for EKS Fargate
-resource "aws_iam_role_policy_attachment" "eks_fargate_policy_attachment" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
-  role       = aws_iam_role.fargate_pod_execution_role.name
+resource "aws_iam_role_policy_attachment" "eks_worker_node_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.eks_node_group_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.eks_node_group_role.name
+}
 
+resource "aws_iam_role_policy_attachment" "ec2_container_registry_readonly" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.eks_node_group_role.name
+}
 
 
 # EKS Cluster
 
 resource "aws_eks_cluster" "this" {
-  name     = "my-eks-fargate-cluster"
+  name     = "my-eks-cluster"
   role_arn = aws_iam_role.eks_cluster_role.arn
   version  = var.eks_version
 
   vpc_config {
     subnet_ids = concat(var.public_subnets, var.private_subnets)
-
   }
 
-
   depends_on = [
-    aws_iam_role_policy_attachment.eks_service_policy_attachment,
-    aws_iam_role_policy_attachment.eks_cluster_policy_attachment
+    aws_iam_role_policy_attachment.eks_service_policy_attach,
+    aws_iam_role_policy_attachment.eks_cluster_policy_attach
   ]
 }
 
 
-# Data: Auth token for the Kubernetes provider
+# EKS Data Sources for cluster & auth
 
 data "aws_eks_cluster" "this" {
   name = aws_eks_cluster.this.name
@@ -109,31 +107,28 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.this.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
   token                  = data.aws_eks_cluster_auth.this.token
-
 }
 
 
-# Fargate Profile
+# EC2 Managed Node Group
 
-resource "aws_eks_fargate_profile" "this" {
-  cluster_name           = aws_eks_cluster.this.name
-  fargate_profile_name   = "fargate-profile"
-  pod_execution_role_arn = aws_iam_role.fargate_pod_execution_role.arn
-  subnet_ids             = var.private_subnets
-  
+resource "aws_eks_node_group" "this" {
+  cluster_name    = aws_eks_cluster.this.name
+  node_group_name = "my-eks-nodes"
+  node_role_arn   = aws_iam_role.eks_node_group_role.arn
+  subnet_ids      = var.private_subnets
 
-  selector {
-    namespace = "default"
-
+  scaling_config {
+    desired_size = 2
+    min_size     = 1
+    max_size     = 3
   }
 
   depends_on = [
     aws_eks_cluster.this,
-    aws_iam_role_policy_attachment.eks_fargate_policy_attachment
+    aws_iam_role.eks_node_group_role
   ]
 }
-
-# helm
 
 provider "helm" {
   kubernetes {
@@ -141,15 +136,33 @@ provider "helm" {
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.this.token
   }
+  
 }
 
 resource "helm_release" "myapp" {
   name      = "myapp"
   namespace = "default"
-
   chart     = "../charts/myapp"
+
+#   # If you want to override any values, do so here.
+#   # Otherwise, you can rely on your chart's values.yaml
+#   values = [
+#     <<EOF
+# replicaCount: 1
+# mongoUri: "mongodb://admin:SomeSecurePasswordHere@10.0.3.50:27017/mydatabase?authSource=admin"
+
+# backend:
+#   image: "783764584115.dkr.ecr.us-east-1.amazonaws.com/backend-ecr-repo:latest"
+#   port: 3000
+
+# frontend:
+#   image: "783764584115.dkr.ecr.us-east-1.amazonaws.com/frontend-ecr-repo:latest"
+#   port: 80
+# EOF
+#   ]
+
   depends_on = [
     aws_eks_cluster.this,
-    aws_eks_fargate_profile.this
+    aws_eks_node_group.this
   ]
 }

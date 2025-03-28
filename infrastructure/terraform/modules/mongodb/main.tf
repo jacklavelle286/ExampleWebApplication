@@ -23,7 +23,8 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = [aws_security_group.this.id]
   iam_instance_profile = aws_iam_instance_profile.mongo_profile.name
   user_data = filebase64("${path.module}/user_data.sh")
-  private_ip = "10.0.1.50"
+
+  private_ip = "10.0.3.50"
   tags = {
         Name = "mongo-instance"
     }
