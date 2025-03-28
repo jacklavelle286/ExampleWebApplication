@@ -1,0 +1,58 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write   # needed for OIDC
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: "us-east-1"
+      AWS_ACCOUNT_ID: "783764584115"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set dynamic environment variables
+        run: |
+          echo "S3_BACKEND_BUCKET=${AWS_ACCOUNT_ID}-${AWS_REGION}-backend-infra-tf-yt" >> $GITHUB_ENV
+          echo "DYNAMO_LOCK_TABLE=${AWS_ACCOUNT_ID}-${AWS_REGION}-backend-infra-tf-yt-lock" >> $GITHUB_ENV
+          echo "ROLE_TO_ASSUME=arn:aws:iam::${AWS_ACCOUNT_ID}:role/OIDCRole" >> $GITHUB_ENV
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.5
+
+      - name: Terraform Init
+        run: |
+          cd infrastructure/terraform
+          terraform init \
+            -backend-config="bucket=${{ env.S3_BACKEND_BUCKET }}" \
+            -backend-config="dynamodb_table=${{ env.DYNAMO_LOCK_TABLE }}" \
+            -backend-config="region=${{ env.AWS_REGION }}" \
+            -backend-config="key=terraform/state.tfstate"
+
+      - name: Terraform Plan
+        run: |
+          cd infrastructure/terraform
+          terraform plan -var="region=${{ env.AWS_REGION }}"
+
+      - name: Terraform Apply
+        run: |
+          cd infrastructure/terraform
+          terraform apply -auto-approve -var="region=${{ env.AWS_REGION }}"
