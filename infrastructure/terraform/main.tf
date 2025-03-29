@@ -33,7 +33,7 @@ module "eks_cluster" {
 
 module "mongo_instance" {
   source = "./modules/mongodb"
-  subnet_id = module.vpc.public_subnet_ids[0] # test
+  subnet_id = module.vpc.private_subnet_ids[0]
   vpc_id = module.vpc.vpc_id
   s3_bucket_arn = module.mongo_bucket.bucket_arn
   secrets_manager_arn = module.secret_manager.secret_arn

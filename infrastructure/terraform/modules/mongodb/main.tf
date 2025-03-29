@@ -22,8 +22,8 @@ resource "aws_instance" "this" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.this.id]
   iam_instance_profile   = aws_iam_instance_profile.mongo_profile.name
- # private_ip             = "10.0.3.50"
-  associate_public_ip_address = true
+  private_ip             = "10.0.3.50"
+  
 
   # user_data must be base64-encoded or use 'user_data_base64' when providing raw bytes
   user_data = base64encode(
@@ -38,7 +38,10 @@ resource "aws_instance" "this" {
 }
 
 
-
+resource "aws_key_pair" "this" {
+  key_name   = "deployer-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgVw9TiiSryLfU52k8b84HcLIgXfEgQ71wSkm4HtYsWDWmFNiluqlj3xtPBv7HdLcH5Zkg6x0/+k6RbMsCB54SGJDrP1q8FGC8RxX5h7jnNPUJV6mVZhJ9Mhk3rZzArABoJikPt38qcachTU7sdDTTzY9uu7bB2FLdsl25iz2UCq47Y5KlZy2o/7UGhH7N57pVmIyeVCVbXo4PoP+43KuPPwtvoKOmjEjHN07Z1Zp0fk/eAdmpiNR0DVSp3rlNDElsbUq8XmKU7MfI1EFtxn0DY/6Pax3SJHuoMCabOmL2yxQPYAYJSt529ZImrCDbTRRrG2OP8BPPnluVt7ROGEoZ5pbdjOf7KNaYZocjmkG2RX+Ywbkf3uBSZTT2fzojIluQ/YnvBx5+BhYdWFhMx2XlRLUo+fL9ApQAiCuXKGqHTZYIIrFUXfj6H8tZq2C+BcPFDJg5X+8dSKR0G34XTpy0Va448KLtfyTCeVPuopI5/Ve8gguPC0APLZuO1keAE2k= jack@jack"
+}
 
 resource "aws_iam_instance_profile" "mongo_profile" {
   name = "test_profile"
@@ -67,6 +70,10 @@ resource "aws_vpc_security_group_egress_rule" "allow_all" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" 
 }
+
+
+
+
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
