@@ -27,7 +27,6 @@ resource "aws_instance" "this" {
   # user_data must be base64-encoded or use 'user_data_base64' when providing raw bytes
   user_data = base64encode(
     templatefile("${path.module}/user_data.tpl", {
-      secret_id = var.secret_id
     })
   )
 
