@@ -23,7 +23,6 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = [aws_security_group.this.id]
   iam_instance_profile   = aws_iam_instance_profile.mongo_profile.name
   private_ip             = "10.0.3.50"
-  
 
   # user_data must be base64-encoded or use 'user_data_base64' when providing raw bytes
   user_data = base64encode(
@@ -37,6 +36,14 @@ resource "aws_instance" "this" {
   }
 }
 
+
+
+
+resource "aws_iam_instance_profile" "mongo_profile" {
+  name = "test_profile"
+  role = aws_iam_role.role.name
+  
+}
 
 
 resource "aws_security_group" "this" {
@@ -59,10 +66,6 @@ resource "aws_vpc_security_group_egress_rule" "allow_all" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" 
 }
-
-
-
-
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
