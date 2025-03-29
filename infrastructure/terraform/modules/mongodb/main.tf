@@ -23,6 +23,7 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = [aws_security_group.this.id]
   iam_instance_profile   = aws_iam_instance_profile.mongo_profile.name
   private_ip             = "10.0.3.50"
+  associate_public_ip_address = true
 
   # user_data must be base64-encoded or use 'user_data_base64' when providing raw bytes
   user_data = base64encode(
@@ -35,6 +36,8 @@ resource "aws_instance" "this" {
     Name = "mongo-instance"
   }
 }
+
+
 
 
 resource "aws_iam_instance_profile" "mongo_profile" {
